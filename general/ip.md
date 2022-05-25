@@ -1,0 +1,5 @@
+
+
+```
+curl if.config.me
+```
