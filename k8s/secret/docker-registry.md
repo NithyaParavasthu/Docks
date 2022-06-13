@@ -27,6 +27,6 @@ kubectl create secret docker-registry <name> \
 
 ### servers
 - https://index.docker.io/v1/
-- https://asia-south1-docker.pkg.dev
+- https://asia.gcr.io
 - so on
 
