@@ -8,6 +8,10 @@ curl -sfL https://get.k3s.io | sh -
 ```
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=<version> sh -
 ```
+### To Install without traefik
+```
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable=traefik" sh -
+```
 
 ## Export the config file
 ```
