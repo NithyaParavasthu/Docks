@@ -24,6 +24,11 @@ ufw allow 80/tcp
 ufw allow 443/tcp
 ```
 
+#### To allow IPs use the following command.
+```
+ufw allow from <IP>
+```
+
 #### Now to check the allowed ports and deny ports. Use the following command. 
 ```
 ufw status verbose
