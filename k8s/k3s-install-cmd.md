@@ -18,7 +18,7 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--flannel-iface enp0s8 --bind-a
 ```
 ### To Install with a specific Name
 ```
-curl -sfL https://get.k3s.io | INSTALL_K3S_NAME=<name> sh-
+curl -sfL https://get.k3s.io | INSTALL_K3S_NAME=<name> sh -
 ```
 
 ## Export the config file
