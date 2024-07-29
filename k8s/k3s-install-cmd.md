@@ -30,3 +30,8 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ```
 sudo chmod 644 $KUBECONFIG
 ```
+
+## To directly access the cluster without any further commands 
+```
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="server --disable=traefik" sh -
+```
