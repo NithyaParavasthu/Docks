@@ -14,7 +14,7 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable=traefik" sh -
 ```
 ### To Install with a specific IP
 ```
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable=traefik --node-ip=13.232.4.54" sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable=traefik --node-ip=<Your external IP address>" sh -
 ```
 ### To Install with a specific Name
 ```
