@@ -2,31 +2,31 @@
 
 ## SetUp
 
-Lets Create a Name space in which we will set up all the monitoring stuff.
+Let's Create a Namespace to set up all the monitoring stuff.
 ```
 kubectl create ns monitoring
 ```
 
-Now, Lets install Grafana With Helm charts
+Now, Let's install Grafana With Helm charts
 
 ```
 helm repo add grafana https://grafana.github.io/helm-charts
 helm install grafana grafana/grafana -n monitoring 
 ```
 
-Now. Lets Install prometheus with helm chart
+Now. Let's install Prometheus with a helm chart
 
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm install prometheus prometheus-community/prometheus -n monitoring
 ```
 
-Now, Lets install Loki with helm chart
+Now, Let's install Loki with the helm chart
 ```
 helm install loki grafana/loki-stack  -n monitoring
 ```
 
-Now access the grafana dashboard using port-farword or loadbalancer or Ingress.
+Now access the Grafana dashboard using port-forward or load balancer or Ingress.
 Ingress file
 ```
 apiVersion: networking.k8s.io/v1
@@ -47,12 +47,12 @@ spec:
               port:
                 number: 80
 ```
-Now apply this ingress with following command
+Now apply this ingress with the following command
 ```
 kubectl apply -f grafana-ingress.yaml -n monitoring
 ```
 
-To login to grafana, USER:admin 
+To log in to Grafana, `USER`:`admin` 
 We need the password. To get the password use the following command.
 ```
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
@@ -60,25 +60,25 @@ kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-pass
 
 ## Configure
 
-Now In grafana dashboard, Lets Configure Both loki and prometheus.
+Now In the Grafana dashboard, Let's Configure Both Loki and Prometheus.
 
-Go to Datasorce -> Add Datasorce.-> Selete prometheus
-  - URL: http://prometheus-server:80
-  - save and Test
+Go to `Datasorce` -> `Add Datasorce`. -> Selete `prometheus`
+  -  URL: `http://prometheus-server:80`
+  -  save and Test
   
 Go to Datasorce -> Add Datasorce.-> Selete Loki
-  - URL: http://loki:3100
-  - save and Test
+  -  URL: `http://loki:3100`
+  -  save and Test
 
-Now Lets create Dashboards using prometheus and loki.
+Now Let's create Dashboards using Prometheus and Loki.
 
 ### Prometheus:
 
-In Dashboard create a folder of your choise or you can use the default folder.
-In that folder import new dashbord.
+In Dashboard create a folder of your choice or use the default folder.
+In that folder import a new dashboard.
 `Import via grafana.com`: 15175 And click load
  - folder: <name of the folder that you created>
- - Prometheus: Select the prometheus datasource that you configured before in the drop down.
+ - Prometheus: Select the `Prometheus` data source that you configured before in the drop-down.
 
 Quers for the dashboard:
 - Cluster memory usage: 
@@ -93,36 +93,39 @@ Quers for the dashboard:
 ```
 sum (container_fs_usage_bytes{id="/",kubernetes_io_hostname=~"^$Node$"}) / sum (container_fs_limit_bytes{id="/",kubernetes_io_hostname=~"^$Node$"}) * 100
 ```
+```
 sum (container_fs_usage_bytes{device=~"^/dev/[sv]d[a-z][1-9]$",id="/",kubernetes_io_hostname=~"^$Node$"}) / sum (container_fs_limit_bytes{device=~"^/dev/[sv]d[a-z][1-9]$",id="/",kubernetes_io_hostname=~"^$Node$"}) * 100
+```
+
 ### Loki:
 
-In that folder import new dashbord.
+In that folder import a new dashboard.
 `Import via grafana.com`: 15141 And click load
  - folder: <name of the folder that you created>
- - Loki: Select the Loki datasource that you configured before in the drop down.
-For custum logs
- In dashboard, select new Dashboard, select panal and run following quers.
+ - Loki: Select the `Loki` data source that you configured before in the drop-down.
+For custom logs
+ In the dashboard, select New Dashboard, select Panel, and run the  following query.
 
 Quers for the dashboard:
  - Error-logs
- visualisaton: logs
+ visualization: logs
 ```
 {namespace="<your ns>"} |= `error`
 ```
  
 - Cluster-creation-logs
-visualisaton: logs
+visualisation: logs
 ```
 {namespace="<your ns>"} |= `attempt number`
 ```
 - custom logs
-visualisaton: logs
+visualisation: logs
 ```
 {app="<your app>"} |= ``
 ```
 
 - Mysql-logs
-visualisaton: logs
+visualisation: logs
 ```
 {app="mysql"} |= ``
 ```
@@ -131,42 +134,42 @@ visualisaton: logs
 ## Alerts
 
 Firstly we need to configure a `Contact point` in Alerting.
- -> Go to `Contact point`. select `+ New contact point` 
- -> Name: grafana-slack
- -> Contact point type: slack
- -> Recipient: <channel name>
- -> Token: <git token>
- -> save contact point
- -> Go to `Notification policies`. select `+ New specific policy`
- -> Contact point: grafana-slack
- -> click `+ Add matchers`. Label: env, Operator: =, Value: prod
- -> save policy
+ -  Go to `Contact point`. select `+ New contact point` 
+ -  Name: grafana-slack
+ -  Contact point type: slack
+ -  Recipient: <channel name>
+ -  Token: <git token>
+ -  save contact point
+ -  Go to `Notification policies`. select `+ New specific policy`
+ -  Contact point: grafana-slack
+ -  click `+ Add matchers`. Label: env, Operator: =, Value: prod
+ -  save policy
 
 ### Cpu-usage-alert
 Go to `Kubernetes monitoring` dashboard.
- -> click on `Cluster-cpu-usage`and selete Edit in the drop down.
- -> In visualization select `timeseries`
- -> go to aleart coloumn. click on "create aleart rule for the panal"
- -> Leave the query A as it is. 
- -> In Query B. change the value in `is above`option from 3 to 75
- -> Click `Run Queries` and check.
- -> In `Alert evaluation behavior`, In `Evaluate every` option change 1m to 10s and 5m to 20s
- -> In `Add details for your alert`, In `Group` give alert-group. 
- -> In `Notifications` for `Key`- env, For `value` prod
- -> Click `save and exit` button on the top corner.
+ -  click on `Cluster-cpu-usage`and select Edit in the drop-down.
+ -  In visualization select `timeseries`
+ -  go to alert column. click on "create alert rule for the panel"
+ -  Leave the query A as it is. 
+ -  In Query, B. change the value in `is above`option from 3 to 75
+ -  Click `Run Queries` and check.
+ -  In `Alert evaluation behavior`, In `Evaluate every` options change 1m to 10s and 5m to 20s
+ -  In `Add details for your alert`, In `Group` give alert-group. 
+ -  In `Notifications` for `Key`- env, For `value` prod
+ -  Click `save and exit` button on the top corner.
  
 ### Cluster filesystem usage
 Go to `Kubernetes monitoring` dashboard.
- -> click on `Cluster filesystem usage`and selete Edit in the drop down.
- -> In visualization select `timeseries`
- -> go to aleart coloumn. click on "create aleart rule for the panal"
- -> Leave the query A as it is. 
- -> In Query B. change the value in `is above`option from 3 to 73
- -> Click `Run Queries` and check.
- -> In `Alert evaluation behavior`, In `Evaluate every` option change 1m to 10s and 5m to 20s
- -> In `Add details for your alert`, In `Group` give alert-group. 
- -> In `Notifications` for `Key`- env, For `value` prod
- -> Click `save and exit` button on the top corner.
+ -  click on `Cluster filesystem usage`and select Edit in the drop down.
+ -  In visualization select `timeseries`
+ -  go to alert column. click on "create alert rule for the panel"
+ -  Leave the query A as it is. 
+ -  In Query, B. change the value in `is above`option from 3 to 73
+ -  Click `Run Queries` and check.
+ -  In `Alert evaluation behavior`, In `Evaluate every` options change 1m to 10s and 5m to 20s
+ -  In `Add details for your alert`, In `Group` give alert-group. 
+ -  In `Notifications` for `Key`- env, For `value` prod
+ -  Click `save and exit` button on the top corner.
  
 ### Cluster memory usage
 Go to `Kubernetes monitoring` dashboard.
