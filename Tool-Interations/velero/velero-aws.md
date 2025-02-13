@@ -1,7 +1,7 @@
 # Velero BackUp
 
 ### Create a User
-We have to Create a user with the following velero policy. and save the credentials Of the user for further use.
+We have to Create a user with the following velero policy. and save the user's credentials for further use.
 ```
 {
     "Version": "2012-10-17",
