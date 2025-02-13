@@ -149,9 +149,9 @@ Firstly we need to configure a `Contact point` in Alerting.
 Go to `Kubernetes monitoring` dashboard.
  -  click on `Cluster-cpu-usage`and select Edit in the drop-down.
  -  In visualization select `timeseries`
- -  go to alert column. click on "create alert rule for the panel"
+ -  go to the alert column. click on "create alert rule for the panel"
  -  Leave the query A as it is. 
- -  In Query, B. change the value in `is above`option from 3 to 75
+ -  In Query B, change the value in `is above` option from 3 to 75
  -  Click `Run Queries` and check.
  -  In `Alert evaluation behavior`, In `Evaluate every` options change 1m to 10s and 5m to 20s
  -  In `Add details for your alert`, In `Group` give alert-group. 
@@ -162,9 +162,9 @@ Go to `Kubernetes monitoring` dashboard.
 Go to `Kubernetes monitoring` dashboard.
  -  click on `Cluster filesystem usage`and select Edit in the drop down.
  -  In visualization select `timeseries`
- -  go to alert column. click on "create alert rule for the panel"
+ -  go to the alert column. click on "create alert rule for the panel"
  -  Leave the query A as it is. 
- -  In Query, B. change the value in `is above`option from 3 to 73
+ -  In Query B, change the value in `is above` option from 3 to 73
  -  Click `Run Queries` and check.
  -  In `Alert evaluation behavior`, In `Evaluate every` options change 1m to 10s and 5m to 20s
  -  In `Add details for your alert`, In `Group` give alert-group. 
@@ -173,40 +173,40 @@ Go to `Kubernetes monitoring` dashboard.
  
 ### Cluster memory usage
 Go to `Kubernetes monitoring` dashboard.
- -> click on `Cluster memory usage`and selete Edit in the drop down.
- -> In visualization select `timeseries`
- -> go to aleart coloumn. click on "create aleart rule for the panal"
- -> Leave the query A as it is. 
- -> In Query B. change the value in `is above`option from 3 to 75
- -> Click `Run Queries` and check.
- -> In `Alert evaluation behavior`, In `Evaluate every` option change 1m to 10s and 5m to 20s
- -> In `Add details for your alert`, In `Group` give alert-group. 
- -> In `Notifications` for `Key`- env, For `value` prod
- -> Click `save and exit` button on the top corner.
+ - Click on `Cluster memory usage` and select Edit in the drop-down.
+ - In visualization select `timeseries`
+ - go to the alert column. click on "create alert rule for the panel"
+ - Leave the query A as it is. 
+ - In Query B, change the value in `is above` option from 3 to 75
+ - Click `Run Queries` and check.
+ - In `Alert evaluation behavior`, In `Evaluate every` options change 1m to 10s and 5m to 20s
+ - In `Add details for your alert`, In `Group` give alert-group. 
+ - In `Notifications` for `Key`- env, For `value` prod
+ - Click `save and exit` button on the top corner.
  
-### Custum log alert
-Go to `Loki custum logs` dashboard.
- -> click on `Custum-logs`and selete Edit in the drop down.
- -> In visualization select `timeseries`
- -> go to aleart coloumn. click on "create aleart rule for the panal"
- -> In Query A, in `Log browser` change the code to ```count_over_time({app="app-name"}[10m] |= "attempt number" )```. 
- -> In Query B. change the value in `is above`option from 3 to 50
- -> Click `Run Queries` and check.
- -> In `Alert evaluation behavior`, In `Evaluate every` option change 1m to 10s and 5m to 1m
- -> In `Add details for your alert`, In `Rule name`give "cluster-creation-exceed" In `Group` give alert-group. 
- -> In `Notifications` for `Key`- env, For `value` prod
- -> Click `save and exit` button on the top corner.
+### Custom log alert
+Go to the `Loki custom logs` dashboard.
+ - Click on `Custum-logs` and select Edit in the drop-down.
+ - In visualization select `timeseries`
+ - Go to the alert column. click on "create alert rule for the panel"
+ - In Query A, in `Log browser` change the code to ```count_over_time({app="app-name"}[10m] |= "attempt number" )```. 
+ - In Query B, change the value in `is above` option from 3 to 50
+ - Click `Run Queries` and check.
+ - In `Alert evaluation behavior`, In `Evaluate every` options change 1m to 10s and 5m to 1m
+ - In `Add details for your alert`, In `Rule name` give "cluster-creation-exceed" In `Group` give alert-group. 
+ - In `Notifications` for `Key`- env, For `value` prod
+ - Click `save and exit` button on the top corner.
  
 ### Mysql-error
-Go to `Loki custum logs` dashboard.
- -> click on `Mysql-logs`and selete Edit in the drop down.
- -> In visualization select `timeseries`
- -> go to aleart coloumn. click on "create aleart rule for the panal"
- -> In Query A, in `Log browser` change the code to ```count_over_time({app="mysql"}[10m]|= "connection")```. 
- -> In Query B. change the value in `is above`option from 3 to 15
- -> Click `Run Queries` and check.
- -> In `Alert evaluation behavior`, In `Evaluate every` option change 1m to 10s and 5m to 1m
- -> In `Add details for your alert`, In `Rule name`give "Mysql-error" In `Group` give alert-group. 
- -> In `Notifications` for `Key`- env, For `value` prod
- -> Click `save and exit` button on the top corner.
+Go to the `Loki custom logs` dashboard.
+ - Click on `Mysql-logs` and select Edit in the drop-down.
+ - In visualization select `timeseries`
+ - go to the alert column. click on "create alert rule for the panel"
+ - In Query A, in `Log browser` change the code to ```count_over_time({app="mysql"}[10m]|= "connection")```. 
+ - In Query B, change the value in `is above` option from 3 to 15
+ - Click `Run Queries` and check.
+ - In `Alert evaluation behavior`, In `Evaluate every` options change 1m to 10s and 5m to 1m
+ - In `Add details for your alert`, In `Rule name` give "Mysql-error" In `Group` give alert-group. 
+ - In `Notifications` for `Key`- env, For `value` prod
+ - Click `save and exit` button on the top corner.
  
