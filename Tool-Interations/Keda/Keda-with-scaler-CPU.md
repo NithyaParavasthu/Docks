@@ -50,7 +50,7 @@ spec:
     metadata:
       value: "70"              # cpu percentage to trigger the autoscaling 
 ```
-- Now apply this file with `kubectl` apply command.
+- Now apply this file with the `kubectl` apply command.
 ```
 kubectl apply -f keda.yaml
 ```
@@ -60,4 +60,16 @@ kubectl get all,scaledobjects.keda.sh
 ```
 
 ## Testing.
+- Generate load with K6. and test whether the load is increasing the pods by CPU.
+- You can see example of k6 with here
+  
+## Cleanup
+
+- Clean up the environment by uninstalling the application with the following command.
+  ```
+  helm uninstall keda
+  ```
+  ```
+  helm uninstall boutique
+  ```
 
